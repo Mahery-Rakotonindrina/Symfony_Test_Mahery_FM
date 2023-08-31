@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}produit index{% endblock %}
+{% block title %}Les Produits{% endblock %}
 
 {% block body %}
-    <h1>produit index</h1>
+    <h1>Liste des produits disponible</h1>
 
     <form action="{{ path('app_produit_index') }}" method="get" class="mb-3">
-        <label for="category">Filter by Category:</label>
+        <label for="category">Filtre par categorie:</label>
         <div class="row">
             <div class="form-group col-md-8">
                 <select id="category" name="category" class="form-control">
-                    <option value="">All</option>
+                    <option value="">Tous</option>
                     {% for category in categories %}
                         <option value="{{ category.id }}">{{ category.Nom }}</option>
                     {% endfor %}
                 </select>
             </div>    
             <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Apply Filter</button>
+                <button type="submit" class="btn btn-primary">Appliquer</button>
             </div>
         </div>
     </form>
@@ -42,17 +42,17 @@
                 <td>{{ produit.Prix }}</td>
                 <td>{{ produit.categorie.Nom }}</td>
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">Show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">No records found</td>
+                <td colspan="6">Aucun produit disponible</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_new') }}" class="btn btn-success">Create new</a>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-success">Créer nouveau produit</a>
 {% endblock %}
