@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}produit index{% endblock %}
+
+{% block body %}
+    <h1>produit index</h1>
+
+    <form action="{{ path('app_produit_index') }}" method="get" class="mb-3">
+        <label for="category">Filter by Category:</label>
+        <div class="row">
+            <div class="form-group col-md-8">
+                <select id="category" name="category" class="form-control">
+                    <option value="">All</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.Nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>    
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Apply Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.Nom }}</td>
+                <td>{{ produit.Quantite }}</td>
+                <td>{{ produit.Prix }}</td>
+                <td>{{ produit.categorie.Nom }}</td>
+                <td>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">Show</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}
