@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des commandes{% endblock %}
+
+{% block body %}
+    <h1>Les commandes déjà effectué</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.Nom }}</td>
+                <td>{{ commande.Quantite }}</td>
+                <td>{{ commande.Prix }}</td>
+                <td>{{ commande.categorie.Nom }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-warning">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun commande disponible</td>
+            </tr>  
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_new') }}" class="btn btn-success">Créer nouveau commande</a>
+{% endblock %}

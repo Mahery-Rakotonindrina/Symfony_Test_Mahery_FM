@@ -1,0 +1,9 @@
+{# templates/commande/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Commande{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle commande</h1>
+    {% include 'commande/_form.html.twig' with {'form': form, 'button_label': 'Créer'} %}
+{% endblock %}
