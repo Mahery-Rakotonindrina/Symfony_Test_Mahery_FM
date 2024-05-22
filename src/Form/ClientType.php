@@ -15,8 +15,8 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('Nom',TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'placeholder' => 'Choisir un client'
+                'attr' => ['class' => 'form-control',
+                'required' => true]
                 ])
             ->add('Prenoms',TextType::class, [
                 'attr' => ['class' => 'form-control']

@@ -8,32 +8,37 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Quantité</th>
-                <th>Prix</th>
-                <th>Categorie</th>
+                <th>ID</th>
+                <th>Client</th>
+                <th>Date de Création</th>
+                <th>Produits</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for commande in commandes %}
-            <tr>
-                <td>{{ commande.id }}</td>
-                <td>{{ commande.Nom }}</td>
-                <td>{{ commande.Quantite }}</td>
-                <td>{{ commande.Prix }}</td>
-                <td>{{ commande.categorie.Nom }}</td>
-                <td>
-                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}" class="btn btn-info">Voir</a>
-                    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-warning">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Aucun commande disponible</td>
-            </tr>  
-        {% endfor %}
+            {% for commande in commandes %}
+                <tr>
+                    <td>{{ commande.id }}</td>
+                    <td>{{ commande.client.nom }} {{ commande.client.prenoms }}</td>
+                    <td>{{ commande.createdAt|date('Y-m-d H:i') }}</td>
+                    <td>
+                        <ul>
+                            {% for produit in commande.produits %}
+                                <li>{{ produit.nom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {# <a href="{{ path('commande_show', {'id': commande.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('commande_edit', {'id': commande.id}) }}" class="btn btn-warning">Modifier</a> #}
+                        {# Vous pouvez ajouter un bouton pour supprimer la commande ici #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun commande disponible</td>
+                </tr>  
+            {% endfor %}
         </tbody>
     </table>
 

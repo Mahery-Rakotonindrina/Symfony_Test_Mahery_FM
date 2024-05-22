@@ -16,17 +16,19 @@ class Commande
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $numClient = null;
-
-    #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'commandes')]
+    #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'commandes', cascade: ["persist"])]
     private Collection $produits;
+
+    #[ORM\ManyToOne(targetEntity: Client::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Client $client = null;
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -34,14 +36,14 @@ class Commande
         return $this->id;
     }
 
-    public function getNumClient(): ?int
+    public function getClient(): ?Client
     {
-        return $this->numClient;
+        return $this->client;
     }
 
-    public function setNumClient(int $numClient): static
+    public function setClient(?Client $client): static
     {
-        $this->numClient = $numClient;
+        $this->client = $client;
 
         return $this;
     }
